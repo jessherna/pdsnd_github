@@ -200,6 +200,26 @@ def print_filter_info(city, month, day, entry_count):
     print("Day: ", day.title())
     print("Number of Entries: ", entry_count)
     print('-' * 40)
+    
+def display_data(df):
+    """Displays rows of data based on user input."""
+
+    start_row = 0
+    display_rows = 5
+
+    while True:
+        # Display rows of data
+        print(df.iloc[start_row : start_row + display_rows])
+
+        # Ask user if they want to see more rows
+        show_more = input('\nDo you want to see the next {} rows of data? Enter yes or no.\n'.format(display_rows))
+        
+        # Update the start_row value to display the next set of rows
+        start_row += display_rows
+        
+        if show_more.lower() != 'yes':
+            break
+
 
 def main():
     while True:
@@ -211,6 +231,12 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        
+        # Ask user if they want to see rows of data
+        show_data = input('\nWould you like to see 5 rows of individual trip data? Enter yes or no.\n')
+        
+        if show_data.lower() == 'yes':
+            display_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
