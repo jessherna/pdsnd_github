@@ -233,14 +233,24 @@ def main():
         user_stats(df)
         
         # Ask user if they want to see rows of data
-        show_data = input('\nWould you like to see 5 rows of individual trip data? Enter yes or no.\n')
-        
-        if show_data.lower() == 'yes':
-            display_data(df)
+        while True:
+            show_data = input('\nWould you like to see 5 rows of individual trip data? Enter yes or no.\n')
+            if show_data.lower() == 'yes':
+                display_data(df)
+                break
+            elif show_data.lower() == 'no':
+                break
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
-            break
+        while True:
+            restart = input('\nWould you like to restart? Enter yes or no.\n')
+            if restart.lower() == 'yes':
+                break
+            elif restart.lower() == 'no':
+                return
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
 
 
 if __name__ == "__main__":
