@@ -9,7 +9,7 @@ This project aims to leverage Python for exploring and analyzing data from bike 
 
 ### Usage
 1. Open the terminal and navigate to the project directory.
-2. Run the Python script bike_share_analysis.py using the command: python bikeshare.py
+2. Run the Python script bikeshare.py using the command: python bikeshare.py
 3. The script will prompt you to choose a city (Chicago, New York City, or Washington) and present various options to explore different aspects of the bike share data.
 4. Interact with the script by providing your preferences, and it will compute the relevant descriptive statistics and display them in the terminal.
 
