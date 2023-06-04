@@ -1,6 +1,7 @@
 import time
 import pandas as pd
 import calendar
+import datetime
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york': 'new_york_city.csv',
@@ -145,15 +146,22 @@ def trip_duration_stats(df):
 
     # display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    print("Total travel time: ", total_travel_time)
+    total_travel_time = datetime.timedelta(seconds=int(total_travel_time))
+    total_days = total_travel_time.days
+    total_hours = total_travel_time.seconds // 3600
+    total_minutes = (total_travel_time.seconds % 3600) // 60
+    print("Total travel time: {} days, {} hours, {} minutes".format(total_days, total_hours, total_minutes))
 
     # display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
-    print("Mean travel time: ", mean_travel_time)
-
+    mean_travel_time = datetime.timedelta(seconds=int(mean_travel_time))
+    mean_hours = mean_travel_time.seconds // 3600
+    mean_minutes = (mean_travel_time.seconds % 3600) // 60
+    print("Mean travel time: {} hours, {} minutes".format(mean_hours, mean_minutes))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
+
 
 
 def user_stats(df):
@@ -233,14 +241,24 @@ def main():
         user_stats(df)
         
         # Ask user if they want to see rows of data
-        show_data = input('\nWould you like to see 5 rows of individual trip data? Enter yes or no.\n')
-        
-        if show_data.lower() == 'yes':
-            display_data(df)
+        while True:
+            show_data = input('\nWould you like to see 5 rows of individual trip data? Enter yes or no.\n')
+            if show_data.lower() == 'yes':
+                display_data(df)
+                break
+            elif show_data.lower() == 'no':
+                break
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
-            break
+        while True:
+            restart = input('\nWould you like to restart? Enter yes or no.\n')
+            if restart.lower() == 'yes':
+                break
+            elif restart.lower() == 'no':
+                return
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
 
 
 if __name__ == "__main__":
